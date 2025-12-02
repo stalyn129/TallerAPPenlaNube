@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Inventario - Lista de Productos</title>
+</head>
+
+<body>
+
+<h1>Lista de Productos</h1>
+
+<a href="/productos/nuevo">➕ Agregar Producto</a>
+
+<br/><br/>
+
+<table border="1" cellpadding="8" cellspacing="0">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Categoría</th>
+            <th>Precio</th>
+            <th>Stock Actual</th>
+            <th>Registrar Salida</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr th:each="p : ${productos}">
+            <td th:text="${p.idProducto}"></td>
+            <td th:text="${p.nombre}"></td>
+            <td th:text="${p.categoria}"></td>
+            <td th:text="${p.precio}"></td>
+            <td th:text="${p.stockActual}"></td>
+
+            <td>
+                <form th:action="@{'/stock/salida/' + ${p.idProducto}}" method="post">
+                    <input type="number" name="cantidad" min="1" placeholder="Cantidad" required/>
+                    <button type="submit">Procesar</button>
+                </form>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+</body>
+</html>
